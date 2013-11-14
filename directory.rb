@@ -1,3 +1,4 @@
+# First we list the students as strings"
 puts "Students in my cohort (November) are listed below:"
 
 puts "Tom Groombridge"
@@ -23,7 +24,7 @@ puts "Simon Woolf"
 puts "James Brooke"
 puts "Ken Scott"
 
-
+# Now, we print the total, print is used to ensure no new line is inserted
 print "Overall we have"
 print 9
 puts "great students." 
