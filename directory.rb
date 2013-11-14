@@ -17,31 +17,72 @@ students = [
 {:name => "Asta Bevainyte", :cohort => :November},
 {:name => "Erica Salvaneschi", :cohort => :November},
 {:name => "Nisar Tahir", :cohort => :November},
-{:name => "Anath abensour", :cohort => :November},
+{:name => "Anath Abensour", :cohort => :November},
 {:name => "Simon Woolf", :cohort => :November},
 {:name => "James Brooke", :cohort => :November},
 {:name => "Ken Scott", :cohort => :November}
 ]
 # This is a method called print header which includes the text that heads up our script
 def print_header
-  puts "The Students of my cohort at Makers Academy"
-  puts "-------------------------------------------"
+  print "The Students of my cohort at Makers Academy\n"
+  print "-------------------------------------------\n"
 end 
 
 # The body of our script is a method called 'print' with the argument 'names'.  The .each command takes each of the 'names' values and puts them to the screen. 
-def print(students)
+def printing(students)
   students.each do |x|
-    puts "#{x[:name]} (#{x[:cohort]} cohort)"
+    print "#{x[:name]} (#{x[:cohort]} cohort)\n"
   end
 end 
 
 # The footer of our script is a method called 'print_footer' with the argument 'names'
 def print_footer(names)
-  puts "Overall we have #{names.length} great students."
+  print "Overall we have #{names.length} great students.\n"
 end 
 
+
+def input_students
+  print "Please enter the names of the students\n"
+  print "To finish, just hit return twice\n"
+  # Create an empty array
+  students = []
+  # Get the first name
+  name = gets.chomp
+
+  # while name is not empty repeat this process
+  while !name.empty? do
+    # Add the student hash to the array
+    students << {:name => name, :cohort => :November}
+    print "Now we have #{students.length} students\n"
+    # Get another name from the user
+    name = gets.chomp
+  end
+
+  #Return array of students
+  students 
+end
+
 # Here we assign students as the variable for the argument 'names' in both cases. Students is the array we created at the beginning.
+students = input_students
 print_header
-print(students)
+printing(students)
 print_footer(students)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
