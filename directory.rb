@@ -1,8 +1,3 @@
-
-puts "Students in my cohort (November) are listed below:"
-
-# Changing student into an array
-
 students = [
 "Tom Groombridge",
 "Hannah Knights",
@@ -27,10 +22,26 @@ students = [
 "James Brooke",
 "Ken Scott"
 ]
-
-students.each do |x|
-  puts x
+# This is a method called print header which includes the text that heads up our script
+def print_header
+  puts "The Students of my cohort at Makers Academy"
+  puts "-------------------------------------------"
 end 
 
-# Now, we print the total, print is used to ensure no new line is inserted
-puts "Overall we have #{students.length} great students." 
+# The body of our script is a method called 'print' with the argument 'names'.  The .each command takes each of the 'names' values and puts them to the screen. 
+def print(names)
+  names.each do |x|
+    puts x
+  end
+end 
+
+# The footer of our script is a method called 'print_footer' with the argument 'names'
+def print_footer(names)
+  puts "Overall we have #{names.length} great students."
+end 
+
+# Here we assign students as the variable for the argument 'names' in both cases. Students is the array we created at the beginning.
+print_header
+print(students)
+print_footer(students)
+
