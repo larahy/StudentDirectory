@@ -1,29 +1,36 @@
-# First we list the students as strings"
+
 puts "Students in my cohort (November) are listed below:"
 
-puts "Tom Groombridge"
-puts "Hannah Knights"
-puts "Georgi Georgiev"
-puts "Me!"
-puts "Tom Shacham"
-puts "Kumy Veluppillai"
-puts "Jean-Baptiste Blanc"
-puts "Nicky Keszler"
-puts "James Graham"
-puts "Bruce Steedman"
-puts "Michael Fisher"
-puts "Peter Kristo"
-puts "Jeremy Marer"
-puts "Giacomo Patella"
-puts "Gianni Guitteaud"
-puts "Asta Bevainyte"
-puts "Erica Salvaneschi"
-puts "Nisar Tahir"
-puts "Anath abensour"
-puts "Simon Woolf"
-puts "James Brooke"
-puts "Ken Scott"
+# Changing student into an array
 
-student_count = 22
+students = [
+"Tom Groombridge",
+"Hannah Knights",
+"Georgi Georgiev",
+"Me!",
+"Tom Shacham",
+"Kumy Veluppillai",
+"Jean-Baptiste Blanc",
+"Nicky Keszler",
+"James Graham",
+"Bruce Steedman",
+"Michael Fisher",
+"Peter Kristo",
+"Jeremy Marer",
+"Giacomo Patella",
+"Gianni Guitteaud",
+"Asta Bevainyte",
+"Erica Salvaneschi",
+"Nisar Tahir",
+"Anath abensour",
+"Simon Woolf",
+"James Brooke",
+"Ken Scott"
+]
+
+students.each do |x|
+  puts x
+end 
+
 # Now, we print the total, print is used to ensure no new line is inserted
-puts "Overall we have #{student_count} great students." 
+puts "Overall we have #{students.length} great students." 
