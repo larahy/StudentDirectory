@@ -30,9 +30,12 @@ end
 
 # The body of our script is a method called 'print' with the argument 'names'.  The .each command takes each of the 'names' values and puts them to the screen. 
 def printing(students)
-  students.each do |x|
-    print "#{x[:name]} (#{x[:cohort]} cohort)\n"
-  end
+  students.each_with_index do |student, index|
+    print "#{index + 1}: #{student[:name]} (#{student[:cohort]} cohort)\n"
+    # print index, ":"
+  end 
+  # students.each do |x|
+  # end
 end 
 
 # The footer of our script is a method called 'print_footer' with the argument 'names'
