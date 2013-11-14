@@ -22,5 +22,8 @@ puts "Anath abensour"
 puts "Simon Woolf"
 puts "James Brooke"
 puts "Ken Scott"
-puts "Fake Name"
 
+
+print "Overall we have"
+print 9
+puts "great students." 
