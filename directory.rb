@@ -28,13 +28,21 @@ def input_students
 
 end
 
-def A_names(students)
-  students.select do |student|
-    if student[:name][0] == "a"
+def short_names(students)
+  students.each do |student|
+    if student[:name].length < 12
       puts "#{student[:name]} (#{student[:cohort]} cohort"
     end 
   end
 end
+
+# def A_names(students)
+#   students.select do |student|
+#     if student[:name][0] == "a"
+#       puts "#{student[:name]} (#{student[:cohort]} cohort"
+#     end 
+#   end
+# end
 
 # This is a method called print header which includes the text that heads up our script
 def print_header
@@ -51,7 +59,7 @@ end
 # Here we assign students as the variable for the argument 'names' in both cases. Students is the array we created at the beginning.
 students = input_students
 print_header
-A_names(@students)
+short_names(@students)
 print_footer(@students)
 
 
