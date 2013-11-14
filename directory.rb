@@ -24,7 +24,6 @@ puts "Simon Woolf"
 puts "James Brooke"
 puts "Ken Scott"
 
+student_count = 22
 # Now, we print the total, print is used to ensure no new line is inserted
-print "Overall we have"
-print 9
-puts "great students." 
+puts "Overall we have #{student_count} great students." 
