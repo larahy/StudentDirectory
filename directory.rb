@@ -1,92 +1,126 @@
-# # Define what to include in the header
-# def print_header
-#   print "The students on my cohort at Makers Accademy are:\n"
-#   print "-------------------------\n\n"
-# end
+current_students = [
+{:first_name => "Tom", :last_name => " Groombridge", :cohort => :November},
+{:first_name => "Hannah", :last_name => " Knights", :cohort => :November},
+{:first_name => "Georgi", :last_name => " Georgiev", :cohort => :November},
+{:first_name => "Lara", :last_name => " Young", :cohort => :November},
+{:first_name => "Tom", :last_name => " Shacham", :cohort => :November},
+{:first_name => "Kumy", :last_name => " Veluppillai", :cohort =>:November},
+{:first_name => "Jean-Baptiste", :last_name => " Blanc", :cohort => :November},
+{:first_name => "Nicki", :last_name => " Keszler", :cohort => :November},
+{:first_name => "James", :last_name => " Graham", :cohort => :November},
+{:first_name => "Bruce", :last_name => " Steedman", :cohort => :November},
+{:first_name => "Michael", :last_name => " Fisher", :cohort => :November},
+{:first_name => "Peter", :last_name => " Kristo", :cohort => :November},
+{:first_name => "Jeremy", :last_name => " Marer", :cohort => :November},
+{:first_name => "Giacomo", :last_name => " Patella", :cohort => :November},
+{:first_name => "Gianni", :last_name => " Guitteaud", :cohort => :November},
+{:first_name => "Asta", :last_name => " Bevainyte", :cohort => :November},
+{:first_name => "Erica", :last_name => " Salvaneschi", :cohort => :November},
+{:first_name => "Nisar", :last_name => " Tahir", :cohort => :November},
+{:first_name => "Anath", :last_name => " Abensour", :cohort => :November},
+{:first_name => "Simon", :last_name => " Woolf", :cohort => :November},
+{:first_name => "James", :last_name => " Brooke", :cohort => :November},
+{:first_name => "Ken", :last_name => " Scott", :cohort => :November},
+{:first_name => "Nadia", :last_name => " Odunayo", :cohort => :September},
+] 
 
-# # Method to print all students in the array followed by their cohort onto the screen
-# def print_students(students)
-#   students.each do |student|
-#     print "#{student[:name]} is from the #{student[:cohort]}cohort.\n"
-#   end
-# end
+#Method sorts students alphabetically and prints to screen
+def alphabetical_list(students)
+  sorted_array = students.sort_by {|person| person[:last_name]}
+  sorted_array.each do |student|
+  puts "#{student[:first_name]} #{student[:last_name]} -- #{student[:cohort]}"
+  end
+end
 
-# # Method to print all students in the array preceded by an index to the screen
-# def print_students_index(students)
-#   students.each_with_index() do |student, index| #The method each_with_index requires two parameters within the pipes
-#     print "#{index + 1} #{student[:name]} from the #{student[:cohort]} cohort.\n" # The index always starts at 0, so to read sensibly we must start with index +1
-#   end
-# end
+#Method selects students from the November Cohort and prints to screen
+def view_november(students) 
+  students.select do |student|
+    if student[:cohort] == :November
+      puts "#{student[:first_name]} #{student[:last_name]} -- #{student[:cohort]}"
+    end
+  end
+end
 
-# #Method for printing only students whose name begins with the letter A
-# def print_A_names(students)
-#   students.select do |student|
-#     if student[:name][0] == "a" #we chose the key we are filtering :name, then we chose the index of the letter we are filtering (0) to equal 'a'
-#       puts "#{student[:name]} (#{student[:cohort]} cohort)"
-#     end 
-#   end
-# end
+#Method selects students from the November Cohort and prints to screen
+def view_september(students) 
+  students.select do |student|
+    if student[:cohort] == :september
+      puts "#{student[:first_name]} #{student[:last_name]} -- #{student[:cohort]}"
+    end
+  end
+end
 
-# #Method for printing only students whose names are a certain length
-# def filter_by_length(students)
-#   students.each do |student|
-#     if student[:name].length < 12 #we chose the key we are filtering :name and then call the method.length on this to make sure it is < 12
-#       print "#{student[:name]} from the #{student[:cohort]} cohort.\n"
-#     else
-#       print "Sorry, if you are not listed here it is because you are a bit of a mouthful\n"
-#     end
-#   end
-# end
-
-# # Define what to include in the footer
-# def print_footer(name)
-#   print "There are #{name.length} students on the course.\n"
-# end
-
-# Methods for collecting inputs
 def get_first_name
-  print "Please can you enter your first name?\n"
+  print "Please enter the first name of the student you wish to add?\n"
   gets.chomp
 end
 
 def get_last_name
-  print "Please can you enter your last name?\n"
+  print "Please enter the last name of the student you wish to add?\n"
   gets.chomp
 end
 
 def get_cohort
-  print "Please enter your cohort?\n"
+  print "Please enter the cohort of this student?\n"
   gets.chomp
 end
 
-def input_students
-  student_array = []
-  print "return twice when you don't have any more data to enter.\n"
+def input_students(current_students)
     first_name = get_first_name
-  while !first_name.empty? do
-    # check here
+  if first_name != ''
     last_name = get_last_name
     cohort = get_cohort
-    student_array << {:first_name => first_name, :last_name => last_name, :cohort => cohort}
-    first_name = get_first_name
+    current_students << {:first_name => first_name, :last_name => last_name, :cohort => cohort}
   end
-  return student_array
+  puts current_students
+end
+#Method prints options to screen
+def menu_options
+  puts "Good morning, you have two options; you can either"
+  puts "1. Add students to the directory\n or\n 2. View a list of students enrolled at Makers Academy"
 end
 
+def prompt_user_choice
+  puts "Would you like to choose option 1, or option 2?\n> "
+end
 
-def list_inputs(something)
-  something.each do |student_array|
-  puts "#{student_array[:first_name]} #{student_array[:last_name]}is from the #{student_array[:cohort]}cohort."
+def implement_user_choice(user_choice, current_students)
+  if user_choice == "1"
+  input_students(current_students)
+  elsif user_choice == "2" 
+  prompt = "> " 
+  puts "In what format would you like to view the students?"
+  puts "Option 1 - all students alphabetically, Option 2 - November cohort?, Option 3 - September Cohort?\n> "
+  list_format = gets.chomp
+  implement_format_choice(list_format, current_students) #An example of method chaining   
+  else
+    puts "Mary, Mary quite contrary,\n
+    How does your garden grow?\n
+    With silver bells,\n
+    And cockle shells,\n
+    And pretty maids all in a row."
   end
 end
 
-student_array = input_students
-list_inputs(student_array)
-#print_students(students)
-#print_students_index(students)
-#print_A_names(students)
-#filter_by_length(students)
-# print_footer(student_array)
+def implement_format_choice(list_format, current_students)
+    if list_format == "1"
+    alphabetical_list(current_students)
+    elsif list_format == "2"
+    view_november(current_students)
+    elsif list_format == "3"
+    view_september(current_students)
+    else 
+    puts "Mary, Mary quite contrary,\nHow does your garden grow?\nWith silver bells,\nAnd cockle shells,\nAnd pretty maids all in a row."
+  end
+end 
+
+#Order script
+menu_options
+puts prompt_user_choice
+user_choice = gets.chomp
+implement_user_choice(user_choice, current_students)
+
+
 
 
 
