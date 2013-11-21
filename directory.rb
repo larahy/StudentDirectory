@@ -1,31 +1,5 @@
-current_students = [
-{:first_name => "Tom", :last_name => " Groombridge", :cohort => :November},
-{:first_name => "Hannah", :last_name => " Knights", :cohort => :November},
-{:first_name => "Georgi", :last_name => " Georgiev", :cohort => :November},
-{:first_name => "Lara", :last_name => " Young", :cohort => :November},
-{:first_name => "Tom", :last_name => " Shacham", :cohort => :November},
-{:first_name => "Kumy", :last_name => " Veluppillai", :cohort =>:November},
-{:first_name => "Jean-Baptiste", :last_name => " Blanc", :cohort => :November},
-{:first_name => "Nicki", :last_name => " Keszler", :cohort => :November},
-{:first_name => "James", :last_name => " Graham", :cohort => :November},
-{:first_name => "Bruce", :last_name => " Steedman", :cohort => :November},
-{:first_name => "Michael", :last_name => " Fisher", :cohort => :November},
-{:first_name => "Peter", :last_name => " Kristo", :cohort => :November},
-{:first_name => "Jeremy", :last_name => " Marer", :cohort => :November},
-{:first_name => "Giacomo", :last_name => " Patella", :cohort => :November},
-{:first_name => "Gianni", :last_name => " Guitteaud", :cohort => :November},
-{:first_name => "Asta", :last_name => " Bevainyte", :cohort => :November},
-{:first_name => "Erica", :last_name => " Salvaneschi", :cohort => :November},
-{:first_name => "Nisar", :last_name => " Tahir", :cohort => :November},
-{:first_name => "Anath", :last_name => " Abensour", :cohort => :November},
-{:first_name => "Simon", :last_name => " Woolf", :cohort => :November},
-{:first_name => "James", :last_name => " Brooke", :cohort => :November},
-{:first_name => "Ken", :last_name => " Scott", :cohort => :November},
-{:first_name => "Nadia", :last_name => " Odunayo", :cohort => :September},
-] 
-
 def save_students(data_for_saving)
-  file = File.open("students.csv", "w")
+  file = File.open("students.csv", "a")
   data_for_saving.each do |student|
     student_data = [student[:first_name], student[:last_name], student[:cohort]]
     csv_line = student_data.join(",")
@@ -41,8 +15,6 @@ def alphabetical_list(students)
   # puts "#{student[:first_name]} #{student[:last_name]} -- #{student[:cohort]}"
   end
 end
-
-data_for_saving = alphabetical_list(current_students)
 
 #Method selects students from the November Cohort and prints to screen
 def view_november(students) 
@@ -62,43 +34,26 @@ def view_september(students)
   end
 end
 
-def get_first_name
-  print "Please enter the first name of the student you wish to add?\n"
-  gets.chomp
-end
-
-def get_last_name
-  print "Please enter the last name of the student you wish to add?\n"
-  gets.chomp
-end
-
-def get_cohort
-  print "Please enter the cohort of this student?\n"
-  gets.chomp
-end
 
 def input_students(current_students)
-    first_name = get_first_name
-  if first_name != ''
-    last_name = get_last_name
-    cohort = get_cohort
-    current_students << {:first_name => first_name, :last_name => last_name, :cohort => cohort}
-  end
-  puts current_students
+  print "Please enter the first name of the student you wish to add?\n"
+  first_name = gets.chomp
+  print "Please enter the last name of the student you wish to add?\n"
+  last_name = gets.chomp
+  print "Please enter the cohort of this student?\n"
+  cohort = gets.chomp
+  current_students << {:first_name => first_name, :last_name => last_name, :cohort => cohort}
 end
 #Method prints options to screen
 def menu_options
   puts "Good morning, you have two options; you can either"
   puts "1. Add students to the directory\n 2. View a list of students enrolled at Makers Academy\n 3. Save the list of students to a file\n 9. Exit the programme."
+  puts "Please type the option you would like?"
 end
 
-def prompt_user_choice
-  puts "Please type the option you would like?\n>"
-end
-
-def implement_user_choice(user_choice, current_students, data_for_saving)
+def implement_user_choice(user_choice, current_students)
   if user_choice == "1"
-  input_students(current_students)
+  current_students = input_students(current_students)
   elsif user_choice == "2" 
   prompt = "> " 
   puts "In what format would you like to view the students?"
@@ -106,7 +61,7 @@ def implement_user_choice(user_choice, current_students, data_for_saving)
   list_format = gets.chomp
   implement_format_choice(list_format, current_students) #An example of method chaining   
   elsif user_choice == "3"
-    save_students(data_for_saving)
+    save_students(current_students)
   elsif user_choice =="9"
     exit
   else
@@ -134,19 +89,13 @@ def implement_format_choice(list_format, current_students)
   end
 end 
 
-
-
 #Order script
-def interactive_menu(students, data_for_saving)
+def interactive_menu(students)
   loop do 
     menu_options
-    puts prompt_user_choice
     user_choice = gets.chomp
-    implement_user_choice(user_choice, students, data_for_saving)
+    implement_user_choice(user_choice, students)
   end
 end
-
-interactive_menu(current_students, data_for_saving)
-
-
-
+current_students = []
+interactive_menu(current_students)
