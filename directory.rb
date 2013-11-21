@@ -24,13 +24,25 @@ current_students = [
 {:first_name => "Nadia", :last_name => " Odunayo", :cohort => :September},
 ] 
 
+def save_students(data_for_saving)
+  file = File.open("students.csv", "w")
+  data_for_saving.each do |student|
+    student_data = [student[:first_name], student[:last_name], student[:cohort]]
+    csv_line = student_data.join(",")
+    file.puts csv_line
+  end
+  file.close
+end
+
 #Method sorts students alphabetically and prints to screen
 def alphabetical_list(students)
-  sorted_array = students.sort_by {|person| person[:last_name]}
+  sorted_array = students.sort_by {|person| person[:last_name].downcase}
   sorted_array.each do |student|
-  puts "#{student[:first_name]} #{student[:last_name]} -- #{student[:cohort]}"
+  # puts "#{student[:first_name]} #{student[:last_name]} -- #{student[:cohort]}"
   end
 end
+
+data_for_saving = alphabetical_list(current_students)
 
 #Method selects students from the November Cohort and prints to screen
 def view_november(students) 
@@ -44,7 +56,7 @@ end
 #Method selects students from the November Cohort and prints to screen
 def view_september(students) 
   students.select do |student|
-    if student[:cohort] == :september
+    if student[:cohort] == :September
       puts "#{student[:first_name]} #{student[:last_name]} -- #{student[:cohort]}"
     end
   end
@@ -77,14 +89,14 @@ end
 #Method prints options to screen
 def menu_options
   puts "Good morning, you have two options; you can either"
-  puts "1. Add students to the directory\n or\n 2. View a list of students enrolled at Makers Academy"
+  puts "1. Add students to the directory\n 2. View a list of students enrolled at Makers Academy\n 3. Save the list of students to a file\n 9. Exit the programme."
 end
 
 def prompt_user_choice
-  puts "Would you like to choose option 1, or option 2?\n> "
+  puts "Please type the option you would like?\n>"
 end
 
-def implement_user_choice(user_choice, current_students)
+def implement_user_choice(user_choice, current_students, data_for_saving)
   if user_choice == "1"
   input_students(current_students)
   elsif user_choice == "2" 
@@ -93,6 +105,10 @@ def implement_user_choice(user_choice, current_students)
   puts "Option 1 - all students alphabetically, Option 2 - November cohort?, Option 3 - September Cohort?\n> "
   list_format = gets.chomp
   implement_format_choice(list_format, current_students) #An example of method chaining   
+  elsif user_choice == "3"
+    save_students(data_for_saving)
+  elsif user_choice =="9"
+    exit
   else
     puts "Mary, Mary quite contrary,\n
     How does your garden grow?\n
@@ -110,34 +126,27 @@ def implement_format_choice(list_format, current_students)
     elsif list_format == "3"
     view_september(current_students)
     else 
-    puts "Mary, Mary quite contrary,\nHow does your garden grow?\nWith silver bells,\nAnd cockle shells,\nAnd pretty maids all in a row."
+    puts "Mary, Mary quite contrary,\n
+    How does your garden grow?\n
+    With silver bells,\n
+    And cockle shells,\n
+    And pretty maids all in a row."
   end
 end 
 
+
+
 #Order script
-menu_options
-puts prompt_user_choice
-user_choice = gets.chomp
-implement_user_choice(user_choice, current_students)
+def interactive_menu(students, data_for_saving)
+  loop do 
+    menu_options
+    puts prompt_user_choice
+    user_choice = gets.chomp
+    implement_user_choice(user_choice, students, data_for_saving)
+  end
+end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+interactive_menu(current_students, data_for_saving)
 
 
 
